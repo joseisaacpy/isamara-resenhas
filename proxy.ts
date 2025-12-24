@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 
 export async function proxy(request: NextRequest) {
   // pega o id da sessão
-  const sessionId = request.cookies.get("sessionId")?.value;
+  const sessionId = request.cookies.get("session_id")?.value;
 
   // tentando acessar área privada sem cookie
   if (!sessionId) {
