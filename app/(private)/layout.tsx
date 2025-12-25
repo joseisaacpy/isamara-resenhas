@@ -3,7 +3,5 @@ export default function PrivateLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <main>
-    <h1>Private</h1>
-    {children}</main>
+  return <main>{children}</main>;
 }
