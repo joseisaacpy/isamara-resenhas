@@ -121,3 +121,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+.title-primary {
+  @apply text-2xl font-bold md:text-4xl;
+}
+
+.title-secondary {
+  @apply text-xl font-bold md:text-2xl;
+}
+
+.paragraph {
+  @apply text-sm md:text-base;
+}
