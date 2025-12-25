@@ -37,7 +37,7 @@ export function proxy(request: NextRequest) {
   if (sessionId && publicRoute?.whenAuthenticated === "redirect") {
     // redireciona para a rota de dashboard
     const redirectURL = request.nextUrl.clone();
-    redirectURL.pathname = "/teste";
+    redirectURL.pathname = "/painel";
     return NextResponse.redirect(redirectURL);
   }
 }
