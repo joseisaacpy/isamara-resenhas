@@ -1,8 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import type { Review } from "@prisma/client";
 
 export default async function Blog() {
-  const reviews: Review[] = await prisma.review.findMany();
+  const reviews = await prisma.review.findMany();
   return (
     <section>
       <h1>Seja bem-vindo ao meu Blog de resenhas</h1>
