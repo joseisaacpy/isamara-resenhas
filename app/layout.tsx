@@ -11,6 +11,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Isamara Resenhas",
+  description: "Blog de resenhas",
 };
 
 export default function RootLayout({
