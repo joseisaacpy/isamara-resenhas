@@ -1,32 +1,43 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 
-export async function proxy(request: NextRequest) {
-  // pega o id da sessão
+const REDIRECT_WHEN_NOT_AUTHENTICATED = "/login";
+
+const publicRoutes = [
+  {
+    path: "/login",
+    whenAuthenticated: "redirect",
+  },
+] as const;
+
+export function proxy(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+  const publicRoute = publicRoutes.find((route) => route.path === path);
   const sessionId = request.cookies.get("session_id")?.value;
-
-  // tentando acessar área privada sem cookie
-  if (!sessionId) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  
+  // se o token não existir e for uma rota publica
+  if (!sessionId && publicRoute) {
+    // next
+    return NextResponse.next();
   }
 
-  //   busca a session no banco
-  const session = await prisma.session.findUnique({
-    where: {
-      id: sessionId,
-    },
-  });
-
-  // se não existir session ou a session estiver expirada
-  if (!session || session.expiresAt < new Date()) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  // se o token não existir e não for uma rota publica
+  if (!sessionId && !publicRoute) {
+    // redireciona para a rota de login
+    const redirectURL = request.nextUrl.clone();
+    redirectURL.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
+    return NextResponse.redirect(redirectURL);
   }
-
-  // se existir session, passa
-  return NextResponse.next();
+  
+  // se o token existir e for uma rota publica
+  if (sessionId && publicRoute?.whenAuthenticated === "redirect") {
+    // redireciona para a rota de dashboard
+    const redirectURL = request.nextUrl.clone();
+    redirectURL.pathname = "/teste";
+    return NextResponse.redirect(redirectURL);
+  }
 }
 
 export const config = {
-  matcher: ["/(private)/:path*"],
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };
