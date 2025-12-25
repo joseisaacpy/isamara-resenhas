@@ -8,7 +8,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Isaamara Resenhas",
+  title: "Isamara Resenhas",
 };
 
 export default function RootLayout({
