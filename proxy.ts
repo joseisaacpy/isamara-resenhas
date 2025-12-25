@@ -5,8 +5,12 @@ const REDIRECT_WHEN_NOT_AUTHENTICATED = "/login";
 
 const publicRoutes = [
   {
-    path: "/login",
+    path: "/login", // página do admin logar
     whenAuthenticated: "redirect",
+  },
+  {
+    path: "/", // paginas dos visitantes
+    whenAuthenticated: "next",
   },
 ] as const;
 
@@ -14,7 +18,7 @@ export function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const publicRoute = publicRoutes.find((route) => route.path === path);
   const sessionId = request.cookies.get("session_id")?.value;
-  
+
   // se o token não existir e for uma rota publica
   if (!sessionId && publicRoute) {
     // next
@@ -28,7 +32,7 @@ export function proxy(request: NextRequest) {
     redirectURL.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
     return NextResponse.redirect(redirectURL);
   }
-  
+
   // se o token existir e for uma rota publica
   if (sessionId && publicRoute?.whenAuthenticated === "redirect") {
     // redireciona para a rota de dashboard
