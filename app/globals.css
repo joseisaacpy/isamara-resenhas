@@ -133,3 +133,7 @@
 .paragraph {
   @apply text-sm md:text-base;
 }
+
+.simple-hover{
+  @apply hover:scale-95 transition-all duration-300
+}
