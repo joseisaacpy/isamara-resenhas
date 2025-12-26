@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import CardReview from "@/components/CardReview";
+import type { Review } from "@prisma/client";
 
 export default async function Blog() {
-  const reviews = await prisma.review.findMany();
+  const reviews: Review[] = await prisma.review.findMany();
   return (
     <section className="flex flex-col gap-4 max-w-7xl mx-auto p-4 pt-5">
       <h1 className="title-primary">
