@@ -47,10 +47,19 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         <p>{review.content}</p>
       </article>
 
-      {/* botão de voltar */}
-      <Link href={"/"}>
-        <Button>Voltar</Button>
-      </Link>
+      <div className="flex justify-between items-center gap-2">
+        {/* botão de voltar */}
+        <Link href={"/"}>
+          <Button>Voltar</Button>
+        </Link>
+        {/* div com datas de criação e atualização */}
+        <div className="flex flex-col gap-1 items-end justify-center">
+          <p className="text-xs text-muted-foreground">Criado em: 11-11-2000</p>
+          <p className="text-xs text-muted-foreground">
+            Atualizado em: 11-11-2000
+          </p>
+        </div>
+      </div>
     </section>
   );
 }
