@@ -1,11 +1,11 @@
 import "dotenv/config";
 
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../lib/prisma.ts";
 import bcrypt from "bcryptjs";
 
 async function main() {
   // credenciais do admin
-  const email = "isamaraadmin@gmail.com";
+  const email = "isamaraadm@gmail.com";
   const password = "apolo1108";
   // cria o hash
   const hashedPassword = await bcrypt.hash(password, 10);
