@@ -1,9 +1,10 @@
-export type Review = {
+export type ReviewCard = {
   id: string;
   title: string;
   content: string;
+  imageUrl: string;
   category: string;
   rating: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };

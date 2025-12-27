@@ -1,11 +1,11 @@
-import type { Review } from "@prisma/client";
+import type { ReviewCard } from "@/types/reviewCard";
 import Link from "next/link";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Star } from "lucide-react";
 
 type CardReviewProps = {
-  review: Review;
+  review: ReviewCard;
 };
 
 export default function CardReview({ review }: CardReviewProps) {
