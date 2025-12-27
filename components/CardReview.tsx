@@ -11,7 +11,7 @@ type CardReviewProps = {
 export default function CardReview({ review }: CardReviewProps) {
   const MAX_RATING = 5;
   return (
-    <Card className="border p-4 rounded shadow-m simple-hover">
+    <Card className="border-2 border-red-500/50 p-4 rounded shadow-m simple-hover">
       <h2 className="text-2xl font-semibold">{review.title}</h2>
       <p className="text-sm text-muted-foreground">{review.category}</p>
       <div className="flex items-center gap-1">
