@@ -27,9 +27,18 @@ export default function CardReview({ review }: CardReviewProps) {
           />
         ))}
       </div>
-      <Link href={`/reviews/${review.id}`}>
-        <Button>Ver detalhes</Button>
-      </Link>
+      <div className="flex gap-2 justify-between items-center">
+        <Link href={`/reviews/${review.id}`}>
+          <Button>Ver detalhes</Button>
+        </Link>
+        {/* div com datas de criação e atualização */}
+        <div className="flex flex-col gap-1 items-end justify-center">
+          <p className="text-xs text-muted-foreground">Criado em: 11-11-2000</p>
+          <p className="text-xs text-muted-foreground">
+            Atualizado em: 11-11-2000
+          </p>
+        </div>
+      </div>
     </Card>
   );
 }
