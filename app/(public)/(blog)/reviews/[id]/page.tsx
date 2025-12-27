@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { formatDate } from "@/lib/formatDate";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 
@@ -11,8 +12,8 @@ type ReviewPageProps = {
   };
 };
 
+const MAX_RATING = 5;
 export default async function ReviewPage({ params }: ReviewPageProps) {
-  const MAX_RATING = 5;
   const { id } = await params;
   // busca a review
   const review = await prisma.review.findUnique({
@@ -23,6 +24,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   if (!review) {
     notFound();
   }
+
+  // formata as datas
+  const createdAt = formatDate(review.createdAt);
+  const updatedAt = formatDate(review.updatedAt);
+
   // retorna a página de review
   return (
     <section className="max-w-3xl mx-auto p-4 pt-6 space-y-4">
@@ -62,9 +68,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         </Link>
         {/* div com datas de criação e atualização */}
         <div className="flex flex-col gap-1 items-end justify-center">
-          <p className="text-xs text-muted-foreground">Criado em: 11-11-2000</p>
           <p className="text-xs text-muted-foreground">
-            Atualizado em: 11-11-2000
+            Criado em: {createdAt}
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Atualizado em: {updatedAt}
           </p>
         </div>
       </div>
