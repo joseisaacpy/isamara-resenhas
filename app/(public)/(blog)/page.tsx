@@ -2,6 +2,9 @@ import { prisma } from "@/lib/prisma";
 import CardReview from "@/components/CardReview";
 import type { ReviewCard } from "@/types/reviewCard";
 
+// força a atualização da página
+export const dynamic = "force-dynamic";
+
 export default async function Blog() {
   const reviews: ReviewCard[] = await prisma.review.findMany({
     select: {
@@ -13,7 +16,7 @@ export default async function Blog() {
       rating: true,
       createdAt: true,
       updatedAt: true,
-    }
+    },
   });
   return (
     <section className="flex flex-col gap-4 max-w-7xl mx-auto p-4 pt-5">
