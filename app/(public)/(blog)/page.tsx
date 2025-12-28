@@ -19,7 +19,7 @@ export default async function Blog() {
     },
   });
   return (
-    <section className="flex flex-col gap-4 max-w-7xl mx-auto p-4 pt-5">
+    <section className="section-container">
       <h1 className="title-primary">
         Seja bem-vindo(a) ao meu blog de resenhas
       </h1>
