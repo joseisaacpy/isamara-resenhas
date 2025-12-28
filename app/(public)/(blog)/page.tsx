@@ -26,7 +26,7 @@ export default async function Blog() {
       <section>
         {/* se nenhuma review for cadastrada */}
         {reviews.length === 0 && <h2>Não há resenhas cadastradas</h2>}
-        <section className="grid gap-4 md:grid-cols-2">
+        <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {/* se houver resenhas cadastradas */}
           {reviews.map((review) => (
             <CardReview key={review.id} review={review} />
