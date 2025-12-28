@@ -1,45 +1,28 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-const REDIRECT_WHEN_NOT_AUTHENTICATED = "/login";
-
-const publicRoutes = [
-  {
-    path: "/login", // página do admin logar
-    whenAuthenticated: "redirect",
-  },
-  {
-    path: "/", // paginas dos visitantes
-    whenAuthenticated: "next",
-  },
-] as const;
+const PRIVATE_ROUTE = "/painel";
 
 export function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const publicRoute = publicRoutes.find((route) => route.path === path);
   const sessionId = request.cookies.get("session_id")?.value;
+  const isPrivateRoute = path === PRIVATE_ROUTE;
 
-  // se o token não existir e for uma rota publica
-  if (!sessionId && publicRoute) {
-    // next
-    return NextResponse.next();
-  }
-
-  // se o token não existir e não for uma rota publica
-  if (!sessionId && !publicRoute) {
-    // redireciona para a rota de login
+  // Não autenticado tentando acessar rota privada
+  if (!sessionId && isPrivateRoute) {
     const redirectURL = request.nextUrl.clone();
-    redirectURL.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
+    redirectURL.pathname = "/login";
     return NextResponse.redirect(redirectURL);
   }
 
-  // se o token existir e for uma rota publica
-  if (sessionId && publicRoute?.whenAuthenticated === "redirect") {
-    // redireciona para a rota de dashboard
+  // Autenticado tentando acessar login
+  if (sessionId && path === "/login") {
     const redirectURL = request.nextUrl.clone();
     redirectURL.pathname = "/painel";
     return NextResponse.redirect(redirectURL);
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
