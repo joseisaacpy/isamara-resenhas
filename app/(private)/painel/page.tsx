@@ -1,11 +1,16 @@
 import { prisma } from "@/lib/prisma";
 import type { ReviewCard } from "@/types/reviewCard";
+import { Metadata } from "next";
 import CardReviewAdmin from "@/components/CardReviewAdmin";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 // força a atualização da página
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Painel de Controle",
+};
 
 export default async function Painel() {
   const reviews: ReviewCard[] = await prisma.review.findMany({
