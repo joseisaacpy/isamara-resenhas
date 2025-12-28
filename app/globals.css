@@ -141,3 +141,7 @@
 .section-container {
   @apply flex flex-col gap-4 max-w-7xl mx-auto p-4 pt-5;
 }
+
+.section-container-post {
+  @apply flex flex-col gap-4 max-w-4xl mx-auto p-4 pt-5
+}
