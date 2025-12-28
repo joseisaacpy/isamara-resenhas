@@ -12,6 +12,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Isamara Resenhas",
   description: "Blog de resenhas",
+  icons: {
+    icon: "/assets/favicons/favicon.ico",
+  },
 };
 
 export default function RootLayout({
